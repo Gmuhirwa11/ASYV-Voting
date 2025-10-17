@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Election Program (EP)</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #000;
+      color: #fff;
+      margin: 0;
+      padding: 20px;
+    }
+        .logo {
+           top:10px;
+           display: flex;
+       }
+        .heading {
+            position: absolute;
+            top: 20px;
+            margin-right: 20px; 
+            right: 0;
+            display: flex;
+            gap: 10px;
+            padding: 10px;
+            background-color: #333;
+        }
+
+        .heading a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 12px;
+            background-color: #555;
+            border-radius: 5px;
+        }
+        .heading a:hover{
+            background-color:aqua;
+        }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background-color: #111;
+      border-radius: 10px;
+      box-shadow: 0 3px 15px rgba(255,255,255,0.1);
+      padding: 30px;
+    }
+    h1 {
+      text-align: center;
+      color: #fff;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input[type="text"], textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: none;
+      background-color: #222;
+      color: #fff;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #28a745;
+      border: none;
+      color: lightblue;
+      padding: 12px 25px;
+      font-size: 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 20px;
+      width: 100%;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #1e7e34;
+    }
+    .hidden {
+      display: none;
+    }
+    .summary {
+      background-color: #333;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 30px;
+      text-align: center;
+      font-size: 18px;
+    }
+    #adminButton {
+      background-color: #6c757d;
+      padding: 10px 15px;
+      border: none;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 25px;
+      font-size: 16px;
+      width: auto;
+    }
+    #adminButton:hover {
+      background-color: #5a6268;
+    }
+        .animation-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        @keyframes slide-fade {
+            0% {
+                opacity: 0;
+                transform: translateX(-50px) scale(0.8) rotate(-5deg);
+            }
+            50% {
+                opacity: 1;
+                transform: translateX(0) scale(1.1) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(50px) scale(0.8) rotate(5deg);
+            }
+        }
+
+        .animated-img {
+            width: 150px;
+            height: 100px;
+            object-fit: cover;
+            margin: 0 15px;
+            border-radius: 5px;
+            
+            animation-name: slide-fade;
+            animation-duration: 6s;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+            animation-timing-function: ease-in-out;
+        }
+
+        .img-1 {
+            animation-delay: 1s;
+        }
+
+        .img-2 {
+            animation-delay: 2s;
+        }
+
+        .img-3 {
+            animation-delay: 4s;
+        }
+   
+  </style>
+</head>
+<body>
+<div class="logo">
+<img src="\\earth\students\Gmuhirwa25\Downloads\43337122-designstyle-beauty-l.png"</img>
+</div>
+<div class="heading">
+        <a href="https://www.asyv.org/erp">HOME</a>
+        <a href="https://www.asyv.org/blog">ABOUT</a>
+        <a href="https://www.asyv.org/the-team">CONTACT</a>
+        <a href="https://www.asyv.org/visit-the-village/service-learning">SERVICES</a>
+        <a href="http://learning.asyv.org/login/index.php">LOGIN</a>
+    </div>
+
+<h2>THE AGAHOZO SHALOM YOUTH VILLAGE</h2>
+  <div class="container">
+    <h1>Election Program (EP)</h1>
+    <form id="voteForm">
+      <label for="epSelect">Select EP Position:</label>
+      <select id="epSelect" required>
+        <option value="" disabled selected>-- Choose an EP --</option>
+        <option value="ARTS AND MUSIC PRODUCTION">ARTS AND MUSIC PRODUCTION</option>
+        <option value="SAWING">SAWING</option>
+        <option value="DISERNING">DISERNING</option>
+        <option value="MECHANICS">MECHANICS</option>
+        <option value="ELECTRONICS">ELECTRONICS</option>
+      </select>
+
+      <label for="candidateName">Enter Candidate Name:</label>
+      <input type="text" id="candidateName" placeholder="Candidate's name" required />
+
+      <label for="reason">Reason for choosing this EP:</label>
+      <textarea id="reason" rows="4" placeholder="Why do you want to vote for this EP?" required></textarea>
+
+      <button type="submit">SUBMIT YOUR VOTE</button>
+    </form>
+
+    <div id="summary" class="summary hidden"></div>
+
+    <button id="adminButton">View Admin Dashboard</button>
+
+    <div id="adminPanel" class="hidden">
+      <h2>Admin Dashboard</h2>
+      <div id="results"></div>
+      <div id="records" style="margin-top:20px;"></div>
+      <button id="resetVotes" style="background-color:#dc3545; margin-top: 20px;">Reset All Votes</button>
+      <button id="backToVoting" style="margin-top: 10px;">Back to Voting</button>
+    </div>
+  </div>
+
+  <script>
+    const voteForm = document.getElementById('voteForm');
+    const summary = document.getElementById('summary');
+    const adminButton = document.getElementById('adminButton');
+    const adminPanel = document.getElementById('adminPanel');
+    const resultsDiv = document.getElementById('results');
+    const recordsDiv = document.getElementById('records');
+    const resetVotesBtn = document.getElementById('resetVotes');
+    const backToVotingBtn = document.getElementById('backToVoting');
+
+    const ADMIN_PASSWORD = "chadrack123";
+
+    voteForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const ep = document.getElementById('epSelect').value.trim();
+      const candidateName = document.getElementById('candidateName').value.trim();
+      const reason = document.getElementById('reason').value.trim();
+
+      if (!ep || !candidateName || !reason) {
+        alert("Please fill all fields.");
+        return;
+      }
+
+      // Load existing data from localStorage
+      let voteCounts = JSON.parse(localStorage.getItem('voteCounts')) || {};
+      let voterRecords = JSON.parse(localStorage.getItem('voterRecords')) || {};
+
+      // Increase vote count for EP
+      voteCounts[ep] = (voteCounts[ep] || 0) + 1;
+
+      // Save updated vote counts
+      localStorage.setItem('voteCounts', JSON.stringify(voteCounts));
+
+      // Save voter record
+      if (!voterRecords[ep]) voterRecords[ep] = [];
+      voterRecords[ep].push({
+        candidateName,
+        reason,
+        ep,
+        timestamp: new Date().toISOString()
+      });
+      localStorage.setItem('voterRecords', JSON.stringify(voterRecords));
+
+      // Show thank you summary
+      summary.innerHTML = `
+        <p>Thank you for voting!</p>
+        <p><strong>EP Position:</strong> ${ep}</p>
+        <p><strong>Candidate Name:</strong> ${candidateName}</p>
+        <p><strong>Reason:</strong> ${reason}</p>
+      `;
+      summary.classList.remove('hidden');
+
+      // Reset form
+      voteForm.reset();
+    });
+
+    adminButton.addEventListener('click', () => {
+      const password = prompt("Enter admin password:");
+      if (password === ADMIN_PASSWORD) {
+        showAdminPanel();
+      } else {
+        alert("Incorrect password.");
+      }
+    });
+
+    function showAdminPanel() {
+      adminPanel.classList.remove('hidden');
+      voteForm.classList.add('hidden');
+      summary.classList.add('hidden');
+      adminButton.style.display = 'none';
+
+      displayResults();
+      displayRecords();
+    }
+
+    function displayResults() {
+      const voteCounts = JSON.parse(localStorage.getItem('voteCounts')) || {};
+      resultsDiv.innerHTML = '<h3>Vote Counts:</h3>';
+      if (Object.keys(voteCounts).length === 0) {
+        resultsDiv.innerHTML += '<p>No votes recorded yet.</p>';
+        return;
+      }
+      for (const ep in voteCounts) {
+        resultsDiv.innerHTML += `<p><strong>${ep}</strong>: ${voteCounts[ep]} votes</p>`;
+      }
+    }
+
+    function displayRecords() {
+      const voterRecords = JSON.parse(localStorage.getItem('voterRecords')) || {};
+      recordsDiv.innerHTML = '<h3>Voter Records:</h3>';
+      if (Object.keys(voterRecords).length === 0) {
+        recordsDiv.innerHTML += '<p>No voter records available.</p>';
+        return;
+      }
+      for (const ep in voterRecords) {
+        recordsDiv.innerHTML += `<h4>${ep}</h4>`;
+        voterRecords[ep].forEach((rec, idx) => {
+          recordsDiv.innerHTML += `
+            <p>${idx + 1}. Candidate: ${rec.candidateName}<br/>
+            Reason: ${rec.reason}<br/>
+            Voted at: ${new Date(rec.timestamp).toLocaleString()}</p>
+          `;
+        });
+      }
+    }
+
+    resetVotesBtn.addEventListener('click', () => {
+      if (confirm("Are you sure you want to reset all votes? This cannot be undone.")) {
+        localStorage.removeItem('voteCounts');
+        localStorage.removeItem('voterRecords');
+        alert("Votes have been reset.");
+        displayResults();
+        displayRecords();
+      }
+    });
+
+    backToVotingBtn.addEventListener('click', () => {
+      adminPanel.classList.add('hidden');
+      voteForm.classList.remove('hidden');
+      adminButton.style.display = 'inline-block';
+    });
+  </script>
+<div class="image.com">
+<h1>WE BELIEVE IN ANNE'S MEMORY</h1>
+<marquee><img src="\\earth\students\Gmuhirwa25\Downloads\download (10).jpg"></img>
+<img src="\\earth\students\Gmuhirwa25\Downloads\download (18).jpg"</img>
+</marquee>
+ <div class="animation-container">
+        <img src="\\earth\students\Gmuhirwa25\Downloads\download (11).jpg" class="animated-img img-1">
+        <img src="\\earth\students\Gmuhirwa25\Downloads\download (12).jpg" class="animated-img img-2">
+        <img src="\\earth\students\Gmuhirwa25\Downloads\images (3).jpg" class="animated-img img-3">
+        <img src="\\earth\students\Gmuhirwa25\Downloads\images (2).jpg" class="animated-img img-4">
+        <img src="\\earth\students\Gmuhirwa25\Downloads\images (8).jpg" class="animated-img img-4">
+        <img src="\\earth\students\Gmuhirwa25\Downloads\images (7).jpg" class="animated-img img-4">
+        <img src="\\earth\students\Gmuhirwa25\Downloads\download (17).jpg" class="animated-img img-4">
+        <img src="\\earth\students\Gmuhirwa25\Downloads\images (6).jpg" class="animated-img img-4">
+        <img src="\\earth\students\Gmuhirwa25\Downloads\download (16).jpg" class="animated-img img-4">
+        <img src="\\earth\students\Gmuhirwa25\Downloads\download (13).jpg" class="animated-img img-4">
+
+    </div>
+
+</div>
+</body>
+</html>
